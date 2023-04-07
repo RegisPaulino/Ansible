@@ -1,0 +1,22 @@
+---
+- name: Apache server instalado
+  hosts: web
+  become: yes
+  module_defaults:
+      ansible.builtin.package:
+        use: dnf
+
+  tasks:
+  - name: Ultima versao do apache server instalado
+    ansible.builtin.dnf:
+      name: httpd
+      state: latest
+  - name: Apache started e enable
+    ansible.builtin.service:
+      name: httpd
+      enabled: true
+      state: started
+  - name: Copiar web.html
+    ansible.builtin.copy:
+      src: ~/ansible-files/web.html
+      dest: /var/www/html/index.html

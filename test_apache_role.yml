@@ -1,0 +1,15 @@
+---
+- name: Use apache_vhost role playbook
+  hosts: node2
+  become: true
+
+  pre_tasks:
+    - debug:
+        msg: 'Iniciando a configuracao do servidor web.'
+
+  roles:
+    - apache_vhost
+
+  post_tasks:
+    - debug:
+        msg: 'Servidor web foi configurado.'
